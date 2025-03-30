@@ -1,0 +1,7 @@
+[submodule "extern/eigen"]
+	path = extern/eigen
+	url = https://gitlab.com/libeigen/eigen.git
+
+[submodule "extern/EigenRand"]
+	path = extern/EigenRand
+	url = git@github.com:bab2min/EigenRand.git

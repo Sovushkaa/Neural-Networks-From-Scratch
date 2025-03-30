@@ -1,0 +1,12 @@
+.idea/
+cmake-build-*
+CMakeCache.txt
+CMakeFiles/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.user
+*.vscode/
+*.csv

@@ -6,13 +6,17 @@
 namespace CNetworks {
     class DataLoader {
     public:
+        DataLoader() = default;
+
         DataLoader(const std::string &train_path, const std::string &test_path);
 
         const Matrix &GetTestX() const;
 
         const Matrix &GetTestY() const;
 
-        int GetNumBatches() const;
+        Index GetTrainSize() const;
+
+        Index GetNumBatches() const;
 
         void SetBatchSize(int batch_size);
 

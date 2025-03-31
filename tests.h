@@ -20,7 +20,7 @@ namespace CNetworks {
 
         GDTrainer trainer =
                 GDTrainer(std::move(loader), std::move(LossFunction::Mse()),
-                          Epoch_number{5}, 0.0001);
+                          Epoch_number{5}, 0.01);
         network = trainer.Train(std::move(network));
         std::cout << "Test successfully passed!" << std::endl << std::endl;
     }

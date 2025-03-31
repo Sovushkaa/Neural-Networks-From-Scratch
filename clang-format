@@ -1,3 +1,10 @@
+AlignConsecutiveDeclarations: false
+SpaceBeforeParens: Never
+SpacesInParentheses: false
+PointerAlignment: Right
+SeparateDefinitionBlocks: Leave
+EmptyLineBeforeAccessModifier: Leave
+AllowShortFunctionsOnASingleLine: Inline
 InsertNewlineAtEOF: true
 AlwaysBreakTemplateDeclarations: Yes
 BasedOnStyle: LLVM

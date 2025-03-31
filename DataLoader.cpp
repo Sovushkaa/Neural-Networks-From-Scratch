@@ -25,7 +25,12 @@ namespace CNetworks {
   const Matrix &DataLoader::GetTestX() const { return x_test_; }
   const Matrix &DataLoader::GetTestY() const { return y_test_; }
 
-  int DataLoader::GetNumBatches() const { return x_train_.cols() / batch_size_; }
+  Index DataLoader::GetTrainSize() const {
+    return x_train_.cols();
+  }
+
+
+  Index DataLoader::GetNumBatches() const { return x_train_.cols() / batch_size_; }
 
   void DataLoader::SetBatchSize(int batch_size) { batch_size_ = batch_size; }
 

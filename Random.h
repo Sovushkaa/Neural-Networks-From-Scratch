@@ -2,6 +2,7 @@
 #include "linalg.h"
 
 namespace CNetworks {
+    //todo
     /*    class Random {
             using Generator = Eigen::Rand::Vmt19937_64;
 

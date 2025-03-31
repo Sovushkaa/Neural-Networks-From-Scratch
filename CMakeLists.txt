@@ -30,5 +30,6 @@ add_executable(NetworksFromScratch main.cpp Layer.cpp
         SGDTrainer.cpp
         GDTrainer.cpp
         SGDWithMomentumTrainer.cpp
+        Except.cpp
 )
 

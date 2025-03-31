@@ -7,6 +7,7 @@ namespace CNetworks {
         : SGDTrainer(
             std::move(DataLoader()), std::move(loss), epoch_number,
             Batch_size{loader.GetTrainSize()}, learning_rate) {
+        loader.SetBatchSize(batch_size_);
         this->loader_ = std::move(loader);
     }
 }

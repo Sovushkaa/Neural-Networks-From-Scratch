@@ -8,10 +8,13 @@ namespace CNetworks {
         DataLoader(const std::string &train_path, const std::string &test_path);
 
         const Matrix &GetTestX() const;
+
         const Matrix &GetTestY() const;
 
         int GetNumBatches() const;
+
         void SetBatchSize(int batch_size);
+
         void ShuffleTrainData();
 
         class BatchIterator {
@@ -20,7 +23,9 @@ namespace CNetworks {
                           int batch_size);
 
             std::pair<Matrix, Matrix> operator*() const;
+
             BatchIterator &operator++();
+
             bool operator!=(const BatchIterator &other) const;
 
         private:
@@ -32,11 +37,15 @@ namespace CNetworks {
 
         struct BatchRange {
             BatchIterator begin() const;
+
             BatchIterator end() const;
+
             const DataLoader &loader;
         };
 
         BatchRange batches() const;
+
+        std::pair<Matrix, Matrix> GetBatch(Index batch_num) const;
 
     private:
         Matrix x_test_;

@@ -1,19 +1,29 @@
+#pragma once
 #include "DataLoader.h"
 #include "Network.h"
 
 namespace CNetworks {
     enum Epoch_number : Index;
     enum Batch_size : Index;
-    class SAGTrainer {
+
+    class BaseTrainer {
     public:
-        SAGTrainer(DataLoader &&loader, LossFunction &&loss,
-                   Epoch_number epoch_number, Batch_size batch_size,
-                   double learning_rate);
+        virtual ~BaseTrainer() = default;
 
-        Network Train(Network &&net);
+        virtual Network Train(Network &&net) = 0;
 
-    private:
-        void TrainOneEpoch(std::vector<Layer> &layers);
+    protected:
+        BaseTrainer(DataLoader &&loader, LossFunction &&loss, Epoch_number epoch_number, Batch_size batch_size);
+
+        struct Layer_inf {
+            Matrix A;
+            Vector b;
+
+            Layer_inf(Matrix &&A, Vector &&b) : A(std::move(A)), b(std::move(b)) {
+            }
+        };
+
+        virtual void TrainOneEpoch(std::vector<Layer> &layers) = 0;
 
         struct Metrics {
             double average_mistake;
@@ -21,12 +31,13 @@ namespace CNetworks {
         };
 
         Metrics ComputeMetrics(const Network &net) const;
+
         void PrintMetrics(const Metrics &metrics) const;
 
         DataLoader loader_;
         LossFunction loss_;
         Index epoch_number_;
         Index batch_size_;
-        double learning_rate_;
     }; // namespace CNetworks
 } // namespace CNetworks
+

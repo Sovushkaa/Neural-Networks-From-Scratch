@@ -24,9 +24,11 @@ add_executable(NetworksFromScratch main.cpp Layer.cpp
         FileReader.cpp
         NetworkBuilder.cpp
         FileWriter.cpp
-        Trainer.cpp
         AdamTrainer.cpp
         Random.cpp
-        SAGTrainer.cpp
+        BaseTrainer.cpp
+        SGDTrainer.cpp
+        GDTrainer.cpp
+        SGDWithMomentumTrainer.cpp
 )
 

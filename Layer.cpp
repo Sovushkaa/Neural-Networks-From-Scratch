@@ -1,20 +1,10 @@
 #include "Layer.h"
+#include "Random.h"
 #include <iostream>
-#include <random>
 
 namespace CNetworks {
-    Layer::Layer(In in_size, Out out_size, ActivationFunction f)
-        : f_(std::move(f)) {
-        std::mt19937 gen(42);
-        std::normal_distribution<double> dis(0.0, 1.0);
-        A_ = Matrix(out_size, in_size);
-        b_ = Matrix(out_size, 1);
-        for (int i = 0; i < out_size; ++i) {
-            for (int j = 0; j < in_size; ++j) {
-                A_(i, j) = dis(gen);
-            }
-            b_(i, 0) = dis(gen);
-        }
+    Layer::Layer(In in_size, Out out_size, ActivationFunction f, Random &rnd)
+        : A_(rnd.normalMatrix(out_size, in_size)), b_(rnd.normalVector(out_size)), f_(std::move(f)) {
     }
 
     Layer::Layer(Matrix &&A, Vector &&b, ActivationFunction f)
@@ -30,7 +20,6 @@ namespace CNetworks {
 
     Matrix Layer::Evaluate(const Matrix &x) const {
         return f_.eval0((A_ * x).colwise() + b_);
-        // return f_.eval0(A_ * x + b_.replicate(1, x.cols()));
     }
 
     Matrix Layer::Gradient_A(const Matrix &x, const Matrix &u) const {
@@ -40,11 +29,6 @@ namespace CNetworks {
                     x.col(j).transpose();
         }
         return grad / x.cols();
-
-        // return f_.eval1(A_ * x + b_).asDiagonal() * u.transpose() * x.transpose();
-        //  return f_.Jacoby(A_ * x + b_) * u.transpose() * x.transpose();
-        //  почему-то когда заменяю строки с eval1 на строчки с Jacaby
-        //  результаты с фикс сидом начинают отличаться, становятся хуже,
     }
 
     Vector Layer::Gradient_b(const Matrix &x, const Matrix &u) const {
@@ -53,9 +37,6 @@ namespace CNetworks {
             grad += f_.eval1(A_ * x.col(j) + b_).asDiagonal() * u.row(j).transpose();
         }
         return grad / x.cols();
-
-        // return f_.eval1(A_ * x + b_).asDiagonal() * u.transpose();
-        //  return f_.Jacoby(A_ * x + b_) * u.transpose();
     }
 
     Matrix Layer::Push(const Matrix &x, const Matrix &u) const {
@@ -64,8 +45,6 @@ namespace CNetworks {
             u_new.row(j) = u.row(j) * f_.eval1(A_ * x.col(j) + b_).asDiagonal() * A_;
         }
         return u_new;
-        // return u * f_.eval1(A_ * x + b_).asDiagonal() * A_;
-        //  return u * f_.Jacoby(A_ * x + b_) * A_;
     }
 
     void Layer::Update(const Matrix &update_A, const Vector &update_b) {

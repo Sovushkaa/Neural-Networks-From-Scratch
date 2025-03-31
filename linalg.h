@@ -7,4 +7,5 @@ namespace CNetworks {
     using Vector = Eigen::VectorXd;
     using Row = Eigen::RowVectorXd;
     using Index = Eigen::Index;
+    using PermutationMatrix = Eigen::PermutationMatrix<Eigen::Dynamic>;
 } // namespace CNetworks

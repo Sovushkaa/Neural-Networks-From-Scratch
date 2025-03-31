@@ -1,6 +1,7 @@
 #pragma once
 #include "ReadCSV.h"
 #include "linalg.h"
+#include "Random.h"
 
 namespace CNetworks {
     class DataLoader {
@@ -15,7 +16,7 @@ namespace CNetworks {
 
         void SetBatchSize(int batch_size);
 
-        void ShuffleTrainData();
+        void ShuffleTrainData(Random &rnd = Random::global());
 
         class BatchIterator {
         public:

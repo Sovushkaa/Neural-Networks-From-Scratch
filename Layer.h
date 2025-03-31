@@ -1,5 +1,6 @@
 #pragma once
 #include "ActivationFunction.h"
+#include "Random.h"
 
 namespace CNetworks {
     enum In : Index;
@@ -8,7 +9,7 @@ namespace CNetworks {
     class Layer {
     public:
         Layer(In in_size, Out out_size,
-              ActivationFunction f = ActivationFunction::Sigmoid());
+              ActivationFunction f = ActivationFunction::Sigmoid(), Random &rnd = Random::global());
 
         Layer(Matrix &&A, Vector &&b,
               ActivationFunction f = ActivationFunction::Sigmoid());

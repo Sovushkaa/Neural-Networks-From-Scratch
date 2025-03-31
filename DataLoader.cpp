@@ -29,15 +29,10 @@ namespace CNetworks {
 
   void DataLoader::SetBatchSize(int batch_size) { batch_size_ = batch_size; }
 
-  void DataLoader::ShuffleTrainData() {
-    Eigen::VectorXi ind(x_train_.cols());
-    for (int i = 0; i < x_train_.cols(); ++i) {
-      ind[i] = i;
-    }
-    std::mt19937 g(42);
-    std::shuffle(ind.data(), ind.data() + ind.size(), g);
-    x_train_ = x_train_ * Eigen::PermutationMatrix<Eigen::Dynamic>(ind);
-    y_train_ = y_train_ * Eigen::PermutationMatrix<Eigen::Dynamic>(ind);
+  void DataLoader::ShuffleTrainData(Random &rnd) {
+    auto perm = rnd.permutation(x_test_.cols());
+    x_test_ *= perm;
+    y_test_ *= perm;
   }
 
   DataLoader::BatchIterator::BatchIterator(const Matrix &x, const Matrix &y,

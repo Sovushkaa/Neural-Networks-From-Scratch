@@ -7,11 +7,6 @@ namespace CNetworks {
     enum Batch_size : Index;
 
     class BaseTrainer {
-    public:
-        virtual ~BaseTrainer() = default;
-
-        virtual Network Train(Network &&net) = 0;
-
     protected:
         BaseTrainer(DataLoader &&loader, LossFunction &&loss, Epoch_number epoch_number, Batch_size batch_size);
 
@@ -22,8 +17,6 @@ namespace CNetworks {
             Layer_inf(Matrix &&A, Vector &&b) : A(std::move(A)), b(std::move(b)) {
             }
         };
-
-        virtual void TrainOneEpoch(std::vector<Layer> &layers) = 0;
 
         struct Metrics {
             double average_mistake;

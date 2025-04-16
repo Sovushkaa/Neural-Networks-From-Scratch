@@ -9,7 +9,7 @@ namespace CNetworks {
                     double alpha_ = 0.001, double beta1 = 0.9, double beta2 = 0.999,
                     double eps = 1e-8);
 
-        Network Train(Network &&net) override;
+        Network Train(Network &&net);
 
     private:
         void TrainOneEpoch(std::vector<Layer> &layers);

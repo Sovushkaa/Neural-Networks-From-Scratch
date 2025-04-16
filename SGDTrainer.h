@@ -7,10 +7,10 @@ namespace CNetworks {
         SGDTrainer(DataLoader &&loader, LossFunction &&loss, Epoch_number epoch_number,
                    Batch_size batch_size, double learning_rate);
 
-        Network Train(Network &&net) override;
+        Network Train(Network &&net);
 
     private:
-        void TrainOneEpoch(std::vector<Layer> &layers) override;
+        void TrainOneEpoch(std::vector<Layer> &layers);
 
         double learning_rate_;
     }; // namespace CNetworks

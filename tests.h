@@ -1,13 +1,5 @@
 #pragma once
-#include "Except.h"
-#include "NetworkBuilder.h"
-#include "SGDTrainer.h"
-#include "GDTrainer.h"
-#include "SGDWithMomentumTrainer.h"
-#include "AdamTrainer.h"
-#include "FileWriter.h"
-#include "FileReader.h"
-#include <fstream>
+#include "DenseNetwork.h"
 
 namespace CNetworks {
     void TestGD() {
@@ -77,10 +69,9 @@ namespace CNetworks {
         b.add_layer(Out{20}, ActivationFunction::Sigmoid())
                 .add_layer(Out{10}, ActivationFunction::Sigmoid());
         Network network = b.extract();
-        FileWriter writer = FileWriter("random_network.txt");
+        FileWriter writer = FileWriter("network.txt");
         writer.write(network);
-        FileReader reader = FileReader("random_network.txt");
-        auto new_loader = DataLoader("mnist_train.csv", "mnist_test.csv");
+        FileReader reader = FileReader("network.txt");
         Network new_network = reader.read<Network>();
         std::cout << "Test successfully passed!" << std::endl << std::endl;
     }

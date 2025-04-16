@@ -2,7 +2,7 @@
 #include "DenseNetwork.h"
 
 namespace CNetworks {
-    void TestGD() {
+    inline void TestGD() {
         std::cout << "TestGD" << std::endl;
         auto loader = DataLoader("mnist_train.csv", "mnist_test.csv");
         NetworkBuilder b(In{784});
@@ -17,7 +17,7 @@ namespace CNetworks {
         std::cout << "Test successfully passed!" << std::endl << std::endl;
     }
 
-    void TestSGD() {
+    inline void TestSGD() {
         std::cout << "TestSGD" << std::endl;
         auto loader = DataLoader("mnist_train.csv", "mnist_test.csv");
         NetworkBuilder b(In{784});
@@ -32,7 +32,7 @@ namespace CNetworks {
         std::cout << "Test successfully passed!" << std::endl << std::endl;
     }
 
-    void TestSGDWithMomentum() {
+    inline void TestSGDWithMomentum() {
         std::cout << "TestSGDWithMomentum" << std::endl;
         auto loader = DataLoader("mnist_train.csv", "mnist_test.csv");
         NetworkBuilder b(In{784});
@@ -47,7 +47,7 @@ namespace CNetworks {
         std::cout << "Test successfully passed!" << std::endl << std::endl;
     }
 
-    void TestAdam() {
+    inline void TestAdam() {
         std::cout << "TestAdam" << std::endl;
         auto loader = DataLoader("mnist_train.csv", "mnist_test.csv");
         NetworkBuilder b(In{784});
@@ -62,7 +62,7 @@ namespace CNetworks {
         std::cout << "Test successfully passed!" << std::endl << std::endl;
     }
 
-    void TestFiles() {
+    inline void TestFiles() {
         std::cout << "TestFiles" << std::endl;
         auto loader = DataLoader("mnist_train.csv", "mnist_test.csv");
         NetworkBuilder b(In{784});
@@ -77,7 +77,7 @@ namespace CNetworks {
     }
 
 
-    void RunALLTests() {
+    inline void RunALLTests() {
         TestGD();
         TestSGD();
         TestSGDWithMomentum();
